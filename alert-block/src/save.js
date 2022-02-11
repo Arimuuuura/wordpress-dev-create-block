@@ -1,6 +1,6 @@
 import { RichText, useBlockProps } from '@wordpress/block-editor';
 
-export default function save({ attributes }) {
+export const save = ({ attributes }) => {
     const { style, content } = attributes;
 
     return (

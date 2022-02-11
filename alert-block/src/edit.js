@@ -2,7 +2,7 @@ import { __ } from '@wordpress/i18n';
 import { PanelBody, SelectControl } from '@wordpress/components';
 import { InspectorControls, RichText, useBlockProps } from '@wordpress/block-editor';
 
-export default function AlertEdit({ attributes, setAttributes }) {
+export const AlertEdit = ({ attributes, setAttributes }) => {
     const { style, content } = attributes;
     const blockProps = useBlockProps({
         className: `alert alert-${style}`,
