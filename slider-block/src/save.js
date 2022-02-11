@@ -1,13 +1,13 @@
 import { __ } from '@wordpress/i18n';
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, RichText } from '@wordpress/block-editor';
+import { Square } from './components/square';
 
-export const save = () => {
+export const save = ({ attributes }) => {
+	const { content, color } = attributes;
+
 	return (
-		<p { ...useBlockProps.save() }>
-			{ __(
-				'Slider Block – hello from the saved content!',
-				'slider-block'
-			) }
-		</p>
+		<div {...useBlockProps.save({ className: color })}>
+            <Square color={color}>{content}</Square>
+        </div>
 	);
 }
