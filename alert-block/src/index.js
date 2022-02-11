@@ -25,14 +25,8 @@ import save from './save';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-registerBlockType( 'create-block/alert-block', {
-	/**
-	 * @see ./edit.js
-	 */
-	edit: Edit,
-
-	/**
-	 * @see ./save.js
-	 */
-	save,
-} );
+ registerBlockType( 'create-block/alert-block', {
+    apiVersion: 2,
+    edit: Edit,
+    save,
+});
