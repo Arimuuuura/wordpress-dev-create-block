@@ -13,11 +13,14 @@
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
 		"start": "wp-env start && open http://localhost:8888",
-        "stop": "wp-env stop",
-        "destroy": "wp-env destroy"
+		"stop": "wp-env stop",
+		"destroy": "wp-env destroy"
 	},
 	"devDependencies": {
+		"@wordpress/components": "^19.4.0",
+		"@wordpress/compose": "^5.1.1",
 		"@wordpress/env": "^4.2.1",
 		"@wordpress/scripts": "^21.0.0"
-	}
+	},
+	"dependencies": {}
 }
