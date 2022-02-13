@@ -4,8 +4,6 @@ import { Square } from './components/Square';
 
 export const save = ({ attributes }) => {
 	const { content, color } = attributes;
-	console.log(`content: ${content}`)
-	// console.log(`color: ${color}`)
 
 	return (
 		<div {...useBlockProps.save()}>

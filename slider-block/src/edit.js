@@ -19,6 +19,17 @@ export const Edit = ({ attributes, setAttributes }) => {
 		{ label: 'Orange', value: 'orange' },
 	];
 
+	const onChangeSelect = (input) => {
+		console.log(!!attributes.content);
+		!!attributes.content ? setAttributes({content: [...content, {color: input}]}) : setAttributes({content: [{color: input}]});
+		setAttributes({color: input});
+	}
+
+	if(!!attributes.content) {
+		// console.log(!!attributes.content);
+		console.log(attributes.content.length);
+	}
+
 	return (
 		<>
 			<InspectorControls>
@@ -37,28 +48,32 @@ export const Edit = ({ attributes, setAttributes }) => {
 			</InspectorControls>
 			<div { ...useBlockProps() }>
 				{
-					color ? (
+					!!attributes.content ? attributes.content.map(() => (
 						<>
-							<Square color={color} />
+							{
+								color && (
+									<Square color={color}/>
+								)
+							}
 							<SelectControl
 								options={
 									OPTIONS.map(
-										({label, value}, index) => ({ label: label, value: value })
+										({label, value}, index) => ({label: label, value: value})
 									)
 								}
 								color={color}
-								onChange={(value) => setAttributes({color: value})}
+								onChange={onChangeSelect}
 							/>
 						</>
-					) : (
+					)) : (
 						<SelectControl
 							options={
 								OPTIONS.map(
-									({label, value}, index) => ({ label: label, value: value })
+									({label, value}, index) => ({label: label, value: value})
 								)
 							}
 							color={color}
-							onChange={(value) => setAttributes({color: value})}
+							onChange={onChangeSelect}
 						/>
 					)
 				}
