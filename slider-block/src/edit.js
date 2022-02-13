@@ -8,9 +8,10 @@ import {useState} from "@wordpress/element";
 
 export const Edit = ({ attributes, setAttributes }) => {
 	const { content, color } = attributes;
-	const [ selectColor, setSelectColor ] = useState('');
+	// const [ selectColor, setSelectColor ] = useState('');
 
 	const OPTIONS = [
+		{ label: 'None', value: '' },
 		{ label: 'Red', value: 'red' },
 		{ label: 'Blue', value: 'blue' },
 		{ label: 'Green', value: 'green' },
@@ -35,16 +36,32 @@ export const Edit = ({ attributes, setAttributes }) => {
 				</PanelBody>
 			</InspectorControls>
 			<div { ...useBlockProps() }>
-				<Square color={selectColor} />
-				<SelectControl
-					options={
-						OPTIONS.map(
-							({label, value}, index) => ({ label: label, value: value })
-						)
-					}
-					color={selectColor}
-					onChange={(value) => setSelectColor(value)}
-				/>
+				{
+					color ? (
+						<>
+							<Square color={color} />
+							<SelectControl
+								options={
+									OPTIONS.map(
+										({label, value}, index) => ({ label: label, value: value })
+									)
+								}
+								color={color}
+								onChange={(value) => setAttributes({color: value})}
+							/>
+						</>
+					) : (
+						<SelectControl
+							options={
+								OPTIONS.map(
+									({label, value}, index) => ({ label: label, value: value })
+								)
+							}
+							color={color}
+							onChange={(value) => setAttributes({color: value})}
+						/>
+					)
+				}
 			</div>
 		</>
 	);
