@@ -26,7 +26,9 @@ export const Edit = ({ attributes, setAttributes }) => {
 	}
 
 	if(!!attributes.content) {
-		// console.log(!!attributes.content);
+		content.map((val, index)=>(
+			console.log(`${val.color} : ${index}`)
+		))
 		console.log(attributes.content.length);
 	}
 
@@ -48,11 +50,11 @@ export const Edit = ({ attributes, setAttributes }) => {
 			</InspectorControls>
 			<div { ...useBlockProps() }>
 				{
-					!!attributes.content ? attributes.content.map(() => (
+					!!attributes.content && attributes.content.map(val => (
 						<>
 							{
 								color && (
-									<Square color={color}/>
+									<Square color={val.color}/>
 								)
 							}
 							<SelectControl
@@ -61,22 +63,21 @@ export const Edit = ({ attributes, setAttributes }) => {
 										({label, value}, index) => ({label: label, value: value})
 									)
 								}
-								color={color}
+								color={val.color}
 								onChange={onChangeSelect}
 							/>
 						</>
-					)) : (
-						<SelectControl
-							options={
-								OPTIONS.map(
-									({label, value}, index) => ({label: label, value: value})
-								)
-							}
-							color={color}
-							onChange={onChangeSelect}
-						/>
-					)
+					))
 				}
+				<SelectControl
+					options={
+						OPTIONS.map(
+							({label, value}, index) => ({label: label, value: value})
+						)
+					}
+					color={color}
+					onChange={onChangeSelect}
+				/>
 			</div>
 		</>
 	);
