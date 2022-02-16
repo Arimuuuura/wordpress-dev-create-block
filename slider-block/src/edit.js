@@ -20,16 +20,21 @@ export const Edit = ({ attributes, setAttributes }) => {
 	];
 
 	const onChangeSelect = (input) => {
-		console.log(!!attributes.content);
+		console.log(input);
 		!!attributes.content ? setAttributes({content: [...content, {color: input}]}) : setAttributes({content: [{color: input}]});
 		setAttributes({color: input});
 	}
 
-	if(!!attributes.content) {
-		content.map((val, index)=>(
-			console.log(`${val.color} : ${index}`)
-		))
-		console.log(attributes.content.length);
+	const onChangeTest = (a) => {
+		console.log(a);
+		console.log(this);
+	}
+
+	if(content) {
+		// content.map((val, index)=>(
+		// 	console.log(`${val.color} : ${index}`)
+		// ))
+		// console.log(content);
 	}
 
 	return (
@@ -50,11 +55,11 @@ export const Edit = ({ attributes, setAttributes }) => {
 			</InspectorControls>
 			<div { ...useBlockProps() }>
 				{
-					!!attributes.content && attributes.content.map(val => (
+					!!attributes.content && attributes.content.map((val, index) => (
 						<>
 							{
 								color && (
-									<Square color={val.color}/>
+									<Square key={`square-${index}`} color={val.color}/>
 								)
 							}
 							<SelectControl
@@ -64,7 +69,8 @@ export const Edit = ({ attributes, setAttributes }) => {
 									)
 								}
 								color={val.color}
-								onChange={onChangeSelect}
+								onChange={onChangeTest}
+								key={`select-${index}`}
 							/>
 						</>
 					))
