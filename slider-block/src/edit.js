@@ -30,12 +30,9 @@ export const Edit = ({ attributes, setAttributes }) => {
 		console.log(this);
 	}
 
-	if(content) {
-		// content.map((val, index)=>(
-		// 	console.log(`${val.color} : ${index}`)
-		// ))
-		// console.log(content);
-	}
+	const blockProps = useBlockProps({
+		className: 'slider-container',
+	});
 
 	return (
 		<>
@@ -53,10 +50,10 @@ export const Edit = ({ attributes, setAttributes }) => {
 					/>
 				</PanelBody>
 			</InspectorControls>
-			<div { ...useBlockProps() }>
+			<div { ...blockProps }>
 				{
 					!!attributes.content && attributes.content.map((val, index) => (
-						<>
+						<div className="current" >
 							{
 								color && (
 									<Square key={`square-${index}`} color={val.color}/>
@@ -72,7 +69,7 @@ export const Edit = ({ attributes, setAttributes }) => {
 								onChange={onChangeTest}
 								key={`select-${index}`}
 							/>
-						</>
+						</div>
 					))
 				}
 				<SelectControl

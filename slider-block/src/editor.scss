@@ -9,7 +9,13 @@
 }
 
 .block-editor-block-list__block {
+  display: flex;
   .components-input-control__container {
 	width: 100px;
+	margin: 0 8px;
   }
+}
+
+.current {
+  background-color: tomato;
 }
