@@ -8,15 +8,31 @@ import {useState} from "@wordpress/element";
 
 export const Edit = ({ attributes, setAttributes }) => {
 	const { content, color } = attributes;
-	const [ selectColor, setSelectColor ] = useState('');
+	// const [ selectColor, setSelectColor ] = useState('');
 
 	const OPTIONS = [
+		{ label: 'None', value: '' },
 		{ label: 'Red', value: 'red' },
 		{ label: 'Blue', value: 'blue' },
 		{ label: 'Green', value: 'green' },
 		{ label: 'Yellow', value: 'yellow' },
 		{ label: 'Orange', value: 'orange' },
 	];
+
+	const onChangeSelect = (input) => {
+		console.log(input);
+		!!attributes.content ? setAttributes({content: [...content, {color: input}]}) : setAttributes({content: [{color: input}]});
+		setAttributes({color: input});
+	}
+
+	const onChangeTest = (a) => {
+		console.log(a);
+		console.log(this);
+	}
+
+	const blockProps = useBlockProps({
+		className: 'slider-container',
+	});
 
 	return (
 		<>
@@ -34,16 +50,36 @@ export const Edit = ({ attributes, setAttributes }) => {
 					/>
 				</PanelBody>
 			</InspectorControls>
-			<div { ...useBlockProps() }>
-				<Square color={selectColor} />
+			<div { ...blockProps }>
+				{
+					!!attributes.content && attributes.content.map((val, index) => (
+						<div className="current" >
+							{
+								color && (
+									<Square key={`square-${index}`} color={val.color}/>
+								)
+							}
+							<SelectControl
+								options={
+									OPTIONS.map(
+										({label, value}, index) => ({label: label, value: value})
+									)
+								}
+								color={val.color}
+								onChange={onChangeTest}
+								key={`select-${index}`}
+							/>
+						</div>
+					))
+				}
 				<SelectControl
 					options={
 						OPTIONS.map(
-							({label, value}, index) => ({ label: label, value: value })
+							({label, value}, index) => ({label: label, value: value})
 						)
 					}
-					color={selectColor}
-					onChange={(value) => setSelectColor(value)}
+					color={color}
+					onChange={onChangeSelect}
 				/>
 			</div>
 		</>
