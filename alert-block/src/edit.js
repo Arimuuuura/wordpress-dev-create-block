@@ -1,12 +1,41 @@
 import { __ } from '@wordpress/i18n';
 import { PanelBody, SelectControl } from '@wordpress/components';
 import { InspectorControls, RichText, useBlockProps } from '@wordpress/block-editor';
+import { useEffect } from "@wordpress/element";
+
 
 export const AlertEdit = ({ attributes, setAttributes }) => {
     const { style, content } = attributes;
+
+		const data = [
+				{
+					age: 10,
+					gen: "men"
+				},
+				{
+					age: 20,
+					gen: "women"
+				}
+			]
+
     const blockProps = useBlockProps({
         className: `alert alert-${style}`,
     });
+
+		useEffect(() => {
+			setAttributes({test: [...data,
+				{
+					age: 30,
+					gen: "men"
+				},
+				{
+					age: 40,
+					gen: "women"
+				}
+			]});
+		},[]);
+
+	// console.table(data)
 
     return (
         <>
